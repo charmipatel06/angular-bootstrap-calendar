@@ -39,7 +39,9 @@ angular
     function updateDays() {
 
       vm.dayViewSplit = parseInt(vm.dayViewSplit);
-      vm.dayViewStart.forEach(function(value, key) {
+      var dayViewStartC = vm.dayViewStart;
+      // var dayViewEndC = vm.dayViewEnd;
+      dayViewStartC.forEach(function(value, key) {
         var dayStart = (vm.dayViewStart[key] || '00:00').split(':');
         var dayEnd = (vm.dayViewEnd[key] || '23:59').split(':');
         vm.hourGrid = calendarUtils.getDayViewHourGrid({
