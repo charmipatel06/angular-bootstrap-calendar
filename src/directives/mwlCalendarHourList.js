@@ -39,19 +39,21 @@ angular
     function updateDays() {
 
       vm.dayViewSplit = parseInt(vm.dayViewSplit);
-      var dayStart = (vm.dayViewStart || '00:00').split(':');
-      var dayEnd = (vm.dayViewEnd || '23:59').split(':');
-      vm.hourGrid = calendarUtils.getDayViewHourGrid({
-        viewDate: vm.view === 'week' ? moment(vm.viewDate).startOf('week').toDate() : moment(vm.viewDate).toDate(),
-        hourSegments: 60 / vm.dayViewSplit,
-        dayStart: {
-          hour: dayStart[0],
-          minute: dayStart[1]
-        },
-        dayEnd: {
-          hour: dayEnd[0],
-          minute: dayEnd[1]
-        }
+      vm.dayViewStart.forEach(values, function (value, key) {
+        var dayStart = (vm.dayViewStart[key] || '00:00').split(':');
+        var dayEnd = (vm.dayViewEnd[key] || '23:59').split(':');
+        vm.hourGrid = calendarUtils.getDayViewHourGrid({
+          viewDate: vm.view === 'week' ? moment(vm.viewDate).startOf('week').toDate() : moment(vm.viewDate).toDate(),
+          hourSegments: 60 / vm.dayViewSplit,
+          dayStart: {
+            hour: dayStart[0],
+            minute: dayStart[1]
+          },
+          dayEnd: {
+            hour: dayEnd[0],
+            minute: dayEnd[1]
+          }
+        });
       });
 
       vm.hourGrid.forEach(function(hour) {
